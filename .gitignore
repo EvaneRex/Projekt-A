@@ -1,0 +1,2 @@
+# Ignorer node_modules, da det kan fylde en hel del og kan geninstalleres med npm
+node_modules/

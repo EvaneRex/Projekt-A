@@ -41,8 +41,8 @@ function tjekAdgangskode() {
   <h1>Login</h1>
   <form method="post" @submit.prevent="valider">
     <label for="email">Email:</label>
-    <input type="text" id="email" v-model="email" required />// v-model gør at det kan opdateres i
-    realtid
+    <input type="text" id="email" v-model="email" required /><!-- v-model gør at det kan opdateres i
+    realtid-->
     <p v-if="emailFejl">{{ emailFejl }}</p>
     <label for="adgangskode">Adgangskode:</label>
     <input type="password" id="adgangskode" v-model="adgangskode" required />
