@@ -1,19 +1,23 @@
-const apiKeys = require("../apiKeys");
+const bcrypt = require("bcrypt");
+const users = require("../apiKeys.json");
 
-const validerAPI = (req, res, next) => {
-  console.log("middleware kører");
-
+const validerAPI = async (req, res, next) => {
   const apiKey = req.headers["x-api-key"];
+  if (!apiKey) return res.status(401).json({ error: "API nøgle mangler" });
 
-  if (!apiKey) {
-    return res.status(401).json({ error: "API nøgle mangler" });
+  let gyldig = false;
+  for (const hash of Object.values(users)) {
+    if (await bcrypt.compare(apiKey, hash)) {
+      gyldig = true;
+      break;
+    }
   }
 
-  const gyldigAPIKey = Object.values(apiKeys).includes(apiKey);
-  if (!gyldigAPIKey) {
-    console.log("Ugyldig API nøgle");
-    return res.status(401).json({ error: "Ugyldig API nøgle" });
+  if (!gyldig) {
+    console.log(`Ugyldig API-nøgle: ${apiKey} fra IP ${req.ip}`);
+    return res.status(401).json({ error: "Ugyldig API-nøgle" });
   }
+
   next();
 };
 

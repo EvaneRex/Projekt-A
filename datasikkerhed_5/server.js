@@ -17,3 +17,5 @@ app.listen(port, IP, () => {
 // https://www.w3schools.com/nodejs/nodejs_rest_api.asp
 // https://www.w3schools.com/nodejs/nodejs_express.asp
 // https://www.youtube.com/watch?v=-MTSQjw5DrM
+// https://www.w3schools.com/nodejs/nodejs_api_auth.asp
+// https://www.npmjs.com/package/bcrypt
