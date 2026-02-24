@@ -1,23 +1,38 @@
 const bcrypt = require("bcrypt");
+const fs = require("fs");
 const users = require("../apiKeys.json");
 
+const logFile = "./unauthorized.log";
+
 const validerAPI = async (req, res, next) => {
-  const apiKey = req.headers["x-api-key"];
-  if (!apiKey) return res.status(401).json({ error: "API nøgle mangler" });
+  const apiKey = req.headers["x-access-key"];
+  if (!apiKey) {
+    fs.appendFileSync(
+      logFile,
+      `${new Date().toISOString()} - Manglende API-nøgle fra IP ${req.ip}\n`,
+    );
+    return res.status(401).json({ error: "API nøgle mangler" });
+  }
 
   let gyldig = false;
-  for (const hash of Object.values(users)) {
+  let user = null;
+  for (const [username, hash] of Object.entries(users)) {
     if (await bcrypt.compare(apiKey, hash)) {
       gyldig = true;
+      user = username;
       break;
     }
   }
 
   if (!gyldig) {
-    console.log(`Ugyldig API-nøgle: ${apiKey} fra IP ${req.ip}`);
+    fs.appendFileSync(
+      logFile,
+      `${new Date().toISOString()} - Ugyldig API-nøgle fra IP ${req.ip}\n`,
+    );
     return res.status(401).json({ error: "Ugyldig API-nøgle" });
   }
 
+  req.user = user;
   next();
 };
 
