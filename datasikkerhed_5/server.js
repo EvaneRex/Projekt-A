@@ -1,4 +1,8 @@
 const express = require("express");
+const spil = require("./data/spil");
+const garnforretninger = require("./data/garnforretninger");
+const byggemarkeder = require("./data/byggemarkeder");
+
 const app = express();
 const port = 3000;
 const IP = "127.0.0.1";
@@ -6,8 +10,14 @@ const IP = "127.0.0.1";
 // Henter middleware ind
 const validerAPI = require("./middleware/validerAPI");
 
-app.get("/noter", validerAPI, (req, res) => {
-  res.json("Serveren kører");
+app.get("/spil", validerAPI, (req, res) => {
+  res.json(spil);
+});
+app.get("/byggemarkeder", validerAPI, (req, res) => {
+  res.json(byggemarkeder);
+});
+app.get("/garnforretninger", validerAPI, (req, res) => {
+  res.json(garnforretninger);
 });
 
 app.listen(port, IP, () => {
