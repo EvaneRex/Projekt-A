@@ -3,6 +3,8 @@ const app = express();
 const port = 3000;
 const IP = "127.0.0.1";
 const path = require("path");
+const cors = require("cors");
+app.use(cors());
 
 const spil = require("./data/spil");
 const garnforretninger = require("./data/garnforretninger");
@@ -14,24 +16,16 @@ const validerAPI = require("./middleware/validerAPI");
 // Routes
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/spil", validerAPI, (req, res) => {
-  if (!["Jan", "Lasse"].includes(req.user)) {
-    return res.status(403).json({ error: "Nægtet adgang" });
-  }
-  res.json(spil);
-});
+// server.js
+app.get("/data", validerAPI, (req, res) => {
+  let data = [];
 
-app.get("/byggemarkeder", validerAPI, (req, res) => {
-  if (!["Jan", "Lasse"].includes(req.user)) {
-    return res.status(403).json({ error: "Nægtet adgang" });
-  }
-  res.json(byggemarkeder);
-});
-app.get("/garnforretninger", validerAPI, (req, res) => {
-  if (!["Gitte"].includes(req.user)) {
-    return res.status(403).json({ error: "Nægtet adgang" });
-  }
-  res.json(garnforretninger);
+  if (req.user === "Jan") data = [...spil, ...byggemarkeder];
+  else if (req.user === "Lasse") data = [...spil, ...byggemarkeder];
+  else if (req.user === "Gitte") data = [...garnforretninger];
+  else return res.status(403).json({ error: "Ingen adgang" });
+
+  res.json({ user: req.user, data });
 });
 
 app.listen(port, IP, () => {
@@ -43,3 +37,4 @@ app.listen(port, IP, () => {
 // https://www.youtube.com/watch?v=-MTSQjw5DrM
 // https://www.w3schools.com/nodejs/nodejs_api_auth.asp
 // https://www.npmjs.com/package/bcrypt
+// https://www.w3schools.com/nodejs/nodejs_crypto.asp
