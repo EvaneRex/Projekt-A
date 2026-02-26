@@ -1,38 +1,27 @@
-# vue_3
+# Vue - 2. semester PBW
 
-This template should help get you started developing with Vue 3 in Vite.
+Dette er en opgave med Vue, og er opgave 3 i listen.
 
-## Recommended IDE Setup
+Opgavebeskrivelsen kan læses i index.html eller her:
+Lav en komponent med et login-formular hvor du bruger ref til inputs. UI skal
+vise valideringsfejl så som ugyldig email og for svagt password.
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Dependencies
 
-## Recommended Browser Setup
+- **vue** - Frontend framework
+- **node** - For at køre projektet
+- **npm** - for at kunne opstarte projektet
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+### Opstart
 
-## Customize configuration
+I terminalen køres
 
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
+```bash
 npm run dev
 ```
 
-### Compile and Minify for Production
+og derefter kører projektet
 
-```sh
-npm run build
-```
+#### Noter
+
+Input felterne ryddes automatisk hvis valideringen fejler, deruvoer får man først besked, når man har trykket submit. Det er fordi man får en "fælles" besked, så man kan ikke se om det var emailen eller koden der var forkert.
