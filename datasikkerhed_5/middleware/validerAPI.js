@@ -24,7 +24,7 @@ const validerAPI = async (req, res, next) => {
 
   // hvis nøglen ikke matcher så er det et uautoriseret forsøg og det smides i konsollen, man kunne også smide det i en logfil
   if (!userFound) {
-    console.log(`Uautoriseret forsøg fra IP ${req.ip} med nøgle: ${apiKey}`);
+    console.log(`Uautoriseret forsøg fra IP ${req.ip}`);
     return res.status(401).json({ error: "Ugyldig API-nøgle" });
   }
 

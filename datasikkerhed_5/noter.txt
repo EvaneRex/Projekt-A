@@ -1,0 +1,9 @@
+Samlet nogle af de kilder og dokumentation der er brugt, noget er til hvordan man laver en API og andet til hashing, saltning og generering af nøgler.
+
+https://www.w3schools.com/nodejs/nodejs_rest_api.asp
+https://www.w3schools.com/nodejs/nodejs_express.asp
+https://www.youtube.com/watch?v=-MTSQjw5DrM
+https://www.w3schools.com/nodejs/nodejs_api_auth.asp
+https://www.npmjs.com/package/bcrypt
+https://www.w3schools.com/nodejs/nodejs_crypto.asp
+

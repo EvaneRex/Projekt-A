@@ -1,14 +1,20 @@
 //- Køres en gang inden man starter serveren op og når man kører projektet første gang, den gemmer de hashede nøgler i apiKeys.json og i forhold til det her projekt, har jeg smidt nøglerne i konsollen.
+
+// Vigtigt!! api-Keys.json må ikke deles med nogen, i det her tilfælde bruges det som en erstatning for en reel datebase, hvor man så ville beskytte den del i databasen ekstra godt, da alle de hashede nøgler ville ligge der
+
 const bcrypt = require("bcrypt"); // er det man bruger til at hashe og salte nøglerne
 const crypto = require("crypto"); // er det man bruger til at skabe tilfældige nøgler
 const fs = require("fs");
 
 const users = ["Jan", "Lasse", "Gitte"];
-const hashedKeys = {};
+let hashedKeys = {};
 
 // Hvis brugerne allerede findes i filen, eks. hvis man opretter en ny bruger, så overskrives de ikke
 if (fs.existsSync("apiKeys.json")) {
-  hashedKeys = JSON.parse(fs.readFileSync("apiKeys.json", "utf8"));
+  const fileContent = fs.readFileSync("apiKeys.json", "utf8").trim();
+  if (fileContent) {
+    hashedKeys = JSON.parse(fileContent);
+  }
 }
 
 // Generer nøglerne for brugerne, både fra start men også hvis man skal tilføje en ny
