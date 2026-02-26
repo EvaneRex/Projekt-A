@@ -41,3 +41,5 @@ og så kan man teste de forskellige nøgler af.
 #### Noter
 
 apiKeys.json fungere i det her tilfælde som en slags database, hvor de hashede nøgler ligger. Både den og generateKeys.js vill optimalt være smidt i .gitignore så de ikke blev smidt op, men her skal det kunne ses i forbindelse med aflevering.
+
+Der er kilder i filen noter.txt, hvis man vil læse eller se lidt mere om nogle af de ting der er brugt.
